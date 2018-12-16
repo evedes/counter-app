@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const Counter = ({count}) => {
@@ -9,42 +10,23 @@ const Counter = ({count}) => {
   );
 }
 
+const updateCounter = (dispatch, type) => {
+  return dispatch({type});
+}
+
 class App extends Component {
-  state = {
-    count: 0
-  };
-
-  updateCounter = (type) => {
-    const { state } = this;
-    switch (type) {
-      case 'INCREMENT': 
-        return this.setState(state => {
-          return {
-            count: state.count + 1,
-          }
-        })
-      case 'DECREMENT':
-        return this.setState(state => {
-          return {
-            count: state.count - 1,
-          }
-        })
-      default:
-        return state;
-    }
-  }
-
   renderButtons = () => {
+    const { dispatch } = this.props;
     return (
       <div>
         <button
           className="mx-2 btn btn-danger shadow"
-          onClick={() => this.updateCounter('INCREMENT')}>
+          onClick={() => updateCounter(dispatch, 'INCREMENT')}>
           +
         </button>
         <button
           className="mx-2 btn btn-danger shadow"
-          onClick={() => this.updateCounter('DECREMENT')}>
+          onClick={() => updateCounter(dispatch, 'DECREMENT')}>
           -
         </button>
       </div>
@@ -52,7 +34,7 @@ class App extends Component {
   }
 
   render() {
-    const { count } = this.state;
+    const { count } = this.props;
     return (
       <div className="text-center">
         <h1>The Counter App</h1>
@@ -64,4 +46,10 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    count: state.count,
+  }
+}
+
+export default connect(mapStateToProps)(App);
