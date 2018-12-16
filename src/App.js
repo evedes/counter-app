@@ -1,25 +1,65 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
+
+const Counter = ({count}) => {
+  return (
+    <div className="m-3">
+      <h1>{count}</h1>
+    </div>
+  );
+}
 
 class App extends Component {
-  render() {
+  state = {
+    count: 0
+  };
+
+  updateCounter = (type) => {
+    const { state } = this;
+    switch (type) {
+      case 'INCREMENT': 
+        return this.setState(state => {
+          return {
+            count: state.count + 1,
+          }
+        })
+      case 'DECREMENT':
+        return this.setState(state => {
+          return {
+            count: state.count - 1,
+          }
+        })
+      default:
+        return state;
+    }
+  }
+
+  renderButtons = () => {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div>
+        <button
+          className="mx-2 btn btn-danger shadow"
+          onClick={() => this.updateCounter('INCREMENT')}>
+          +
+        </button>
+        <button
+          className="mx-2 btn btn-danger shadow"
+          onClick={() => this.updateCounter('DECREMENT')}>
+          -
+        </button>
+      </div>
+    )
+  }
+
+  render() {
+    const { count } = this.state;
+    console.log('count: ', count);
+    return (
+      <div className="text-center">
+        <h1>The Counter App</h1>
+        <h2>Introduction to Redux</h2>
+        <Counter count={count} />
+        { this.renderButtons() }
       </div>
     );
   }
