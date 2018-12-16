@@ -53,7 +53,6 @@ class App extends Component {
 
   render() {
     const { count } = this.state;
-    console.log('count: ', count);
     return (
       <div className="text-center">
         <h1>The Counter App</h1>
