@@ -1,3 +1,10 @@
-Redux: Get the ball rolling in 10 mins
+### Higher-Order Components
 
-Redux  State Counter App Example
+Read the article
+
+[How to get the ball rolling with Redux in ten minutes
+](https://medium.freecodecamp.org/redux-get-the-ball-rolling-in-10min-9d9551ff4b3c)
+
+![Alt text](/img/preview.png?raw=true "Optional Title")
+
+
